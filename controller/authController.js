@@ -20,6 +20,8 @@ module.exports.login = async (req, res, next) => {
     const token = authService.setUser({ _id: user._id, username, password });
     return res.status(200).send({ message: "Login successfull", token: token });
   } catch (error) {
-    res.status(500).send({ message: "Error while creating user" });
+    res
+      .status(500)
+      .send({ message: "Error while creating user", error: error.message });
   }
 };

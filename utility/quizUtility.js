@@ -7,3 +7,23 @@ module.exports.extractQuizJSON = (quiz) => {
   );
   return jsonObj;
 };
+
+module.exports.getFilter = (req) => {
+  const { grade, subject, marks, from, to } = req.query;
+  let filter = {};
+  if (grade) {
+    filter.grade = grade;
+  }
+  if (subject) {
+    filter.subject = subject;
+  }
+  if (marks) {
+    filter.score = Number(marks);
+  }
+  if (from && to) {
+    const fromDate = new Date(from);
+    const toDate = new Date(to);
+    filter.completedDate = { $gte: fromDate, $lte: toDate };
+  }
+  return filter;
+};

@@ -118,7 +118,7 @@ module.exports.submitQuiz = async (req, res, next) => {
     });
   }
 };
-
+ 
 module.exports.retrieveQuiz = async (req, res, next) => {
   const filter = utility.getFilter(req);
   try {

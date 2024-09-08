@@ -9,12 +9,8 @@ module.exports.login = async (req, res, next) => {
       .json({ message: "Username and password are required." });
   }
   try {
-    /* 
-     -> create a mock login router. 
-    */
     let user = await User.findOne({ username: username });
     if (!user) {
-      //create a new user if does not exist. 
       user = new User({
         username: username,
         password: password,

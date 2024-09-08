@@ -17,5 +17,29 @@ module.exports.generateNewQuiz = async (quizDetails) => {
     model: "mixtral-8x7b-32768",
   });
   const content = completion.choices[0]?.message?.content || "";
+  console.log(content);
   return content;
+};
+
+module.exports.scoreQuiz = async (payload) => {
+  const prompt = `You are a teacher in class who is assigned a task to evaluate a quiz taken by students. Here is the quiz data: ${JSON.stringify(
+    payload
+  )}. The data includes question IDs and user responses. Your task is to evaluate the answers and provide the total score in a consistent format. 
+
+  Format your response as follows:
+  Final Score: [score]
+
+  Only include the final score in this format. Do not add any other text or explanations.`;
+  const completion = await groq.chat.completions.create({
+    messages: [
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+    model: "mixtral-8x7b-32768",
+  });
+  const content = completion.choices[0]?.message?.content || "";
+  const score = content.split("\n")[0]?.split("Final Score: ")[1]?.trim(); 
+  return score;
 };

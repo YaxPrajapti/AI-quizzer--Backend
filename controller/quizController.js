@@ -1,8 +1,9 @@
-const { default: mongoose } = require("mongoose");
+const { default: mongoose, mongo } = require("mongoose");
 const groqService = require("../services/groqService");
 const utility = require("../utility/quizUtility");
 const Question = require("../models/question");
 const Quiz = require("../models/quiz");
+const Submission = require("../models/submission");
 
 module.exports.newQuiz = async (req, res, next) => {
   const { qiuzDetails, quizName } = req.body;
@@ -49,5 +50,53 @@ module.exports.newQuiz = async (req, res, next) => {
     return res
       .status(500)
       .send({ message: "Error occured while generating quiz" });
+  }
+};
+
+module.exports.submitQuiz = async (req, res, next) => {
+  const { quizName, responses } = req.body;
+  try {
+    const quiz = await Quiz.findOne({ quizName: quizName }).populate(
+      "questions"
+    );
+    if (!quiz) {
+      return res.status(404).json({ message: "Quiz not found" });
+    }
+    let questionId_to_questionString = new Map();
+    quiz.questions.forEach((question) => {
+      questionId_to_questionString.set(
+        question._id.toString(),
+        question.question
+      );
+    });
+    let payload = []; //we have qestion to ans.
+    responses.forEach((response) => {
+      // console.log(response.questionId, response.userResponse);
+      const pair = {
+        question: questionId_to_questionString.get(response.questionId),
+        userResponse: response.userResponse,
+      };
+      payload.push(pair);
+    });
+    const score = await groqService.scoreQuiz(payload);
+    console.log(score);
+    let attempt = 1;
+    const prev_attempt = await Submission.findOne().sort({ _id: -1 }).exec();
+    if (prev_attempt) {
+      attempt = prev_attempt.attempt + 1;
+    }  
+    const new_submission = new Submission({
+      quizId: quizName,
+      userId: new mongoose.Types.ObjectId(`${req.user._id}`),
+      score: score,
+      attempt: attempt,
+    });
+    const saved_submission = await new_submission.save();
+    console.log(saved_submission);
+    return res.status(200).send({message: "Quiz submitted successfully"});
+  } catch (error) {
+    return res
+      .status(500)
+      .send({ message: "an error occured while submitting the quiz" });
   }
 };

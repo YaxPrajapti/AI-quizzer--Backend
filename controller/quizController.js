@@ -5,6 +5,7 @@ const Question = require("../models/question");
 const Quiz = require("../models/quiz");
 const Submission = require("../models/submission");
 const emailService = require("../services/emailService");
+const redisCache = require("../cache/quizCache");
 
 module.exports.newQuiz = async (req, res, next) => {
   const { qiuzDetails, quizName } = req.body;
@@ -54,6 +55,10 @@ module.exports.newQuiz = async (req, res, next) => {
     const saved_quiz = await new_quiz.save();
     await mongoSession.commitTransaction();
     mongoSession.endSession();
+    const quizWithQuestion = await Quiz.findById(saved_quiz._id).populate(
+      "questions"
+    );
+    await redisCache.save_quiz(quizName, quizWithQuestion);
     return res
       .status(200)
       .send({ message: "Quiz generated successfully", quiz: saved_quiz });
@@ -158,5 +163,38 @@ module.exports.getHints = async (req, res, next) => {
     res
       .status(500)
       .send({ message: "An error occured while generating hints" });
+  }
+};
+
+module.exports.getQuiz = async (req, res, next) => {
+  try {
+    console.log("Getting quiz from redis cache");
+    const cached_quiz = await redisCache.get_quiz(req.params.quizName);
+    if (cached_quiz) {
+      console.log("Quiz found in Redis cache.");
+      return res
+        .status(200)
+        .send({ message: "Quiz fetched successfull", cached_quiz });
+    }
+    const quiz = await Quiz.findOne({ quizName: req.params.quizName }).populate(
+      "questions"
+    );
+    if (!quiz) {
+      return res.status(404).send({ message: "Quiz not found." });
+    }
+    await redisCache.save_quiz(req.params.quizName, JSON.stringify(quiz), {
+      EX: 3600,
+    });
+    console.log("Quiz stored in Redis cache.");
+    return res.status(200).send({
+      message: "Quiz fetched from database",
+      quiz,
+    });
+  } catch (error) {
+    console.error("Error fetching quiz:", error.message);
+    return res.status(500).send({
+      message: "Error occurred while fetching quiz",
+      error: error.message,
+    });
   }
 };

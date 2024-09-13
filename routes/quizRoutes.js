@@ -1,6 +1,7 @@
 const express = require("express");
 const quizController = require("../controller/quizController");
 const authMiddleWare = require("../middleware/authMiddleWare");
+const redisCache = require('../cache/quizCache'); 
 
 const router = express.Router();
 
@@ -24,6 +25,11 @@ router.get(
   "/hints/:questionId",
   authMiddleWare.isAuthenticated,
   quizController.getHints
+);
+router.get(
+  "/:quizName",
+  authMiddleWare.isAuthenticated,
+  quizController.getQuiz
 );
 
 module.exports = router;

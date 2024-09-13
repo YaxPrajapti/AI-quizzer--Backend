@@ -21,7 +21,7 @@ module.exports.sendMail = async (evaluation, quizName, candidateEmail) => {
 
     // Send mail with the defined transport object
     const info = await transporter.sendMail({
-      from: `Yax Prajapati 👻" <${process.env.EMAIL}>`, // sender address
+      from: `Yax Prajapati" <${process.env.EMAIL}>`, // sender address
       to: candidateEmail, // list of receivers
       subject: `${quizName} Evaluation Results`, // Subject line
       text: `Here is your score: ${evaluation.finalScore}`, // plain text body

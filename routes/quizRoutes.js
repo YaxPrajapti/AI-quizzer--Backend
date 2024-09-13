@@ -20,5 +20,10 @@ router.post(
   authMiddleWare.isAuthenticated,
   quizController.submitQuiz
 );
+router.get(
+  "/hints/:questionId",
+  authMiddleWare.isAuthenticated,
+  quizController.getHints
+);
 
 module.exports = router;

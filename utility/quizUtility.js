@@ -1,5 +1,4 @@
 module.exports.extractQuizJSON = (quiz) => {
-  //   console.log(quiz);
   const startIndexOfObj = quiz.indexOf("[");
   const endIndexOfObj = quiz.lastIndexOf("]");
   const jsonObj = JSON.parse(
@@ -26,4 +25,28 @@ module.exports.getFilter = (req) => {
     filter.completedDate = { $gte: fromDate, $lte: toDate };
   }
   return filter;
+};
+
+module.exports.extractScoreAndSuggestions = (response) => {
+  const scoreStart = response.indexOf("Final Score:");
+  let finalScore = null;
+  if (scoreStart !== -1) {
+    const scoreLine = response
+      .substring(scoreStart + 12)
+      .split("\n")[0]
+      .trim();
+    finalScore = parseInt(scoreLine, 10);
+  }
+
+  const suggestionsStart = response.indexOf("Suggestions to improve skills:");
+  const suggestions = [];
+  if (suggestionsStart !== -1) {
+    const suggestionLines = response.substring(suggestionsStart).split("\n");
+    const suggestion1 = suggestionLines[1]?.trim().slice(3);
+    const suggestion2 = suggestionLines[2]?.trim().slice(3);
+    if (suggestion1) suggestions.push(suggestion1);
+    if (suggestion2) suggestions.push(suggestion2);
+  }
+  const finalRes = { finalScore: finalScore, suggestions: suggestions };
+  return finalRes;
 };

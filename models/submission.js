@@ -22,6 +22,12 @@ const submissionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  suggestions: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
 });
 
 module.exports = mongoose.model("Submission", submissionSchema);

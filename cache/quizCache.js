@@ -37,3 +37,23 @@ module.exports.get_quiz = async (key) => {
     console.error("Error in fetching quiz from redis", error);
   }
 };
+
+module.exports.save_user = async (userId, attempt) => {
+  // key -> userId, value -> attempt.
+  try {
+    await client.set(userId, attempt, {
+      EX: 10,
+    });
+  } catch (error) {
+    console.log("User is not tracked by rate limiter", error);
+  }
+};
+
+module.exports.get_user = async (userId) => {
+  try {
+    const attempts = await client.get(userId);
+    return attempts;
+  } catch (error) {
+    console.log("User is not fetched by rate limiter", error);
+  }
+};

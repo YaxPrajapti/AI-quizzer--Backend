@@ -139,9 +139,13 @@ module.exports.submitQuiz = async (req, res, next) => {
 module.exports.retrieveQuiz = async (req, res, next) => {
   const filter = utility.getFilter(req);
   try {
-    const quizHistory = await Submission.find(filter).sort({
-      completedDate: -1,
-    });
+    const quizHistory = await Submission.find(filter)
+      .sort({
+        score: -1,
+      })
+      .skip(1)
+      .limit(1);
+    console.log(quizHistory);
     return res
       .status(200)
       .json({ message: "Quiz history retrieved successfully", quizHistory });

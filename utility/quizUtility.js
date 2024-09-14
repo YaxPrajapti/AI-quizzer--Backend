@@ -22,9 +22,9 @@ module.exports.getFilter = (req) => {
   if (from && to) {
     const fromDate = new Date(from);
     const toDate = new Date(to);
+    toDate.setTime(new Date().getTime()); 
     filter.completedDate = { $gte: fromDate, $lte: toDate };
   }
-  console.log(filter); 
   return filter;
 };
 

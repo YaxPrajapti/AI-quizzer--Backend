@@ -198,3 +198,18 @@ module.exports.getQuiz = async (req, res, next) => {
     });
   }
 };
+
+module.exports.getAll = async (req, res, next) => {
+  try {
+    const quizzes = await Quiz.find().populate("questions");
+    return res
+      .status(200)
+      .send({ message: "Quizzes fetched successfully", quizzes });
+  } catch (error) {
+    console.error("Error fetching all quizzes:", error.message);
+    return res.status(500).send({
+      message: "Error occurred while fetching all quizzes",
+      error: error.message,
+    });
+  }
+};

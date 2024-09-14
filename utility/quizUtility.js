@@ -24,6 +24,7 @@ module.exports.getFilter = (req) => {
     const toDate = new Date(to);
     filter.completedDate = { $gte: fromDate, $lte: toDate };
   }
+  console.log(filter); 
   return filter;
 };
 

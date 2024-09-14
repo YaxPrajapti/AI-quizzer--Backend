@@ -1,7 +1,7 @@
 const express = require("express");
 const quizController = require("../controller/quizController");
 const authMiddleWare = require("../middleware/authMiddleWare");
-const redisCache = require('../cache/quizCache'); 
+const redisCache = require("../cache/quizCache");
 
 const router = express.Router();
 
@@ -26,6 +26,7 @@ router.get(
   authMiddleWare.isAuthenticated,
   quizController.getHints
 );
+router.get("/getAllQuiz", authMiddleWare.isAuthenticated, quizController.getAll);
 router.get(
   "/:quizName",
   authMiddleWare.isAuthenticated,

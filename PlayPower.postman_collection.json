@@ -10,11 +10,21 @@
 		{
 			"name": "login",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmRkZTRkNDQ4OWMwNjJjZTViZTU2YjgiLCJ1c2VybmFtZSI6IllheCIsInBhc3N3b3JkIjoiWWF4IiwiaWF0IjoxNzI1ODY3NzI4LCJleHAiOjE3MjU4NzEzMjh9.flEvuKvEL4OY0yCicXEEPCqwQfQA-piFrdJpPLj_eMA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"Yax\",\n    \"password\": \"Yax\"\n}",
+					"raw": "{\n  \"username\": \"test1\",\n  \"password\": \"test1\",\n  \"email\": \"bajpai.milee@gmail.com\" \n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -22,13 +32,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://quiz-latest-i4n7.onrender.com/api/auth/login",
-					"protocol": "https",
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
 					"host": [
-						"quiz-latest-i4n7",
-						"onrender",
-						"com"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
 						"api",
 						"auth",
@@ -46,7 +55,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"quizName\": \"test19\",\n    \"qiuzDetails\": {\n        \"grade\": 11,\n        \"subject\": \"Maths\",\n        \"totalQuestions\": 10,\n        \"maxScore\": 10,\n        \"difficulty\": \"EASY\"\n    }\n}",
+					"raw": "{\n    \"quizName\": \"test20\",\n    \"qiuzDetails\": {\n        \"grade\": 11,\n        \"subject\": \"Maths\",\n        \"totalQuestions\": 10,\n        \"maxScore\": 10,\n        \"difficulty\": \"EASY\"\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,13 +63,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://quiz-latest-i4n7.onrender.com/api/quiz/new",
-					"protocol": "https",
+					"raw": "http://localhost:3000/api/quiz/new",
+					"protocol": "http",
 					"host": [
-						"quiz-latest-i4n7",
-						"onrender",
-						"com"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
 						"api",
 						"quiz",
@@ -78,7 +86,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"quizName\": \"test18\",\n  \"responses\": [\n    {\n      \"questionId\": \"66dc939ac495618193e86d1f\",\n      \"userResponse\": 5\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d21\",\n      \"userResponse\": 2\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d23\",\n      \"userResponse\": 6\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d25\",\n      \"userResponse\": 5\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d27\",\n      \"userResponse\": 9\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d29\",\n      \"userResponse\": 10\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2b\",\n      \"userResponse\": 11\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2d\",\n      \"userResponse\": 12\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2f\",\n      \"userResponse\": 13\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d31\",\n      \"userResponse\": 14\n    }\n  ]\n}",
+					"raw": "{\n  \"quizName\": \"test20\",\n  \"responses\": [\n    {\n      \"questionId\": \"66dc939ac495618193e86d1f\",\n      \"userResponse\": 5\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d21\",\n      \"userResponse\": 2\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d23\",\n      \"userResponse\": 6\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d25\",\n      \"userResponse\": 5\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d27\",\n      \"userResponse\": 9\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d29\",\n      \"userResponse\": 10\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2b\",\n      \"userResponse\": 11\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2d\",\n      \"userResponse\": 12\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2f\",\n      \"userResponse\": 13\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d31\",\n      \"userResponse\": 14\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -86,13 +94,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://quiz-latest-i4n7.onrender.com/api/quiz/submit",
-					"protocol": "https",
+					"raw": "http://localhost:3000/api/quiz/submit",
+					"protocol": "http",
 					"host": [
-						"quiz-latest-i4n7",
-						"onrender",
-						"com"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
 						"api",
 						"quiz",
@@ -109,13 +116,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://quiz-latest-i4n7.onrender.com/api/quiz/quiz-history?from=2024-09-01&to=2024-09-09",
-					"protocol": "https",
+					"raw": "http://localhost:3000/api/quiz/quiz-history?from=2024-09-01&to=2024-09-10",
+					"protocol": "http",
 					"host": [
-						"quiz-latest-i4n7",
-						"onrender",
-						"com"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
 						"api",
 						"quiz",
@@ -128,7 +134,7 @@
 						},
 						{
 							"key": "to",
-							"value": "2024-09-09"
+							"value": "2024-09-10"
 						}
 					]
 				},
@@ -143,7 +149,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"quizName\": \"test18\",\n  \"responses\": [\n    {\n      \"questionId\": \"66dc939ac495618193e86d1f\",\n      \"userResponse\": 5\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d21\",\n      \"userResponse\": 2\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d23\",\n      \"userResponse\": 6\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d25\",\n      \"userResponse\": 5\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d27\",\n      \"userResponse\": 9\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d29\",\n      \"userResponse\": 10\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2b\",\n      \"userResponse\": 11\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2d\",\n      \"userResponse\": 12\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2f\",\n      \"userResponse\": 13\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d31\",\n      \"userResponse\": 14\n    }\n  ]\n}",
+					"raw": "{\n  \"quizName\": \"test20\",\n  \"responses\": [\n    {\n      \"questionId\": \"66dc939ac495618193e86d1f\",\n      \"userResponse\": 5\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d21\",\n      \"userResponse\": 2\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d23\",\n      \"userResponse\": 6\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d25\",\n      \"userResponse\": 5\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d27\",\n      \"userResponse\": 9\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d29\",\n      \"userResponse\": 10\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2b\",\n      \"userResponse\": 11\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2d\",\n      \"userResponse\": 12\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d2f\",\n      \"userResponse\": 13\n    },\n    {\n      \"questionId\": \"66dc939ac495618193e86d31\",\n      \"userResponse\": 14\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -151,13 +157,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://quiz-latest-i4n7.onrender.com/api/quiz/quiz-retry",
-					"protocol": "https",
+					"raw": "http://localhost:3000/api/quiz/quiz-retry",
+					"protocol": "http",
 					"host": [
-						"quiz-latest-i4n7",
-						"onrender",
-						"com"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
 						"api",
 						"quiz",
@@ -167,6 +172,97 @@
 				"description": "### API Request Description\n\nThis API endpoint allows users to retry a quiz by submitting their responses.\n\n### API Response\n\nThe response for this request is a JSON object with the following properties:\n\n- `message` (string): A message related to the quiz retry.\n    \n- `score` (number): The score obtained after the quiz retry.\n    \n- `all_attempts` (array): An array containing objects with the following properties:\n    \n    - `_id` (string): The unique identifier of the attempt.\n        \n    - `quizId` (string): The unique identifier of the quiz.\n        \n    - `userId` (string): The unique identifier of the user.\n        \n    - `score` (number): The score obtained in the attempt.\n        \n    - `attempt` (number): The attempt number.\n        \n    - `completedDate` (string): The date when the attempt was completed.\n        \n    - `__v` (number): Version control field.\n        \n\n### JSON Schema\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"score\": {\n      \"type\": \"number\"\n    },\n    \"all_attempts\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"_id\": {\n            \"type\": \"string\"\n          },\n          \"quizId\": {\n            \"type\": \"string\"\n          },\n          \"userId\": {\n            \"type\": \"string\"\n          },\n          \"score\": {\n            \"type\": \"number\"\n          },\n          \"attempt\": {\n            \"type\": \"number\"\n          },\n          \"completedDate\": {\n            \"type\": \"string\"\n          },\n          \"__v\": {\n            \"type\": \"number\"\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
 			},
 			"response": []
+		},
+		{
+			"name": "hints",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/quiz/hints/:questionId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quiz",
+						"hints",
+						":questionId"
+					],
+					"variable": [
+						{
+							"key": "questionId",
+							"value": "66e3af2b0e7527df1617eed5"
+						}
+					]
+				},
+				"description": "### Get Quiz Hint\n\nThis endpoint retrieves a hint for a specific quiz question identified by the `questionId`.\n\n#### Request\n\n- Method: GET\n    \n- Endpoint: `http://localhost:3000/api/quiz/hints/:questionId`\n    \n\n#### Response\n\nThe response will include the hint for the specified quiz question."
+			},
+			"response": []
+		},
+		{
+			"name": "getQuiz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/quiz/:quizName",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quiz",
+						":quizName"
+					],
+					"variable": [
+						{
+							"key": "quizName",
+							"value": "test33"
+						}
+					]
+				},
+				"description": "### Get Quiz Details\n\nThis endpoint retrieves the details of a specific quiz based on the provided `quizName`.\n\n#### Request\n\n- Method: GET\n    \n- Endpoint: `http://localhost:3000/api/quiz/:quizName`\n    \n- Path Parameters\n    \n    - `quizName`: The name of the quiz for which details are to be retrieved.\n        \n\n#### Response\n\n- Content Type: application/json\n    \n- Body\n    \n    - `quizName`: The name of the quiz.\n        \n    - `questions`: An array of questions included in the quiz.\n        \n    - `duration`: The duration of the quiz in minutes.\n        \n    - `difficultyLevel`: The difficulty level of the quiz."
+			},
+			"response": []
+		},
+		{
+			"name": "getAllQuiz",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/quiz/getAllQuiz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quiz",
+						"getAllQuiz"
+					]
+				},
+				"description": "The `getAllQuiz` endpoint retrieves a list of all available quizzes.\n\nThe response will be in the JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"quizzes\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"_id\": {\n            \"type\": \"string\"\n          },\n          \"createdBy\": {\n            \"type\": \"string\"\n          },\n          \"quizName\": {\n            \"type\": \"string\"\n          },\n          \"questions\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"_id\": {\n                  \"type\": \"string\"\n                },\n                \"question\": {\n                  \"type\": \"string\"\n                },\n                \"options\": {\n                  \"type\": \"array\",\n                  \"items\": {\n                    \"type\": \"string\"\n                  }\n                },\n                \"answer\": {\n                  \"type\": \"string\"\n                },\n                \"hint\": {\n                  \"type\": \"string\"\n                },\n                \"__v\": {\n                  \"type\": \"integer\"\n                }\n              }\n            }\n          },\n          \"createdAt\": {\n            \"type\": \"string\"\n          },\n          \"__v\": {\n            \"type\": \"integer\"\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -174,7 +270,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmRjNWIxMWIxZTEyZmM5YzExYTVhZGQiLCJ1c2VybmFtZSI6IllheCIsInBhc3N3b3JkIjoiWWF4IiwiaWF0IjoxNzI1ODE2OTAwLCJleHAiOjE3MjU4MjA1MDB9._3V7QIQ5x8Bc5SIzpSh5qiFiI7qzZ3jI89-L5YdhssA",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmU0MmIxYTM1MTgwZDE4YjA3ZmI0ZmUiLCJ1c2VybmFtZSI6InRlc3QxIiwicGFzc3dvcmQiOiJ0ZXN0MSIsImVtYWlsIjoiYmFqcGFpLm1pbGVlQGdtYWlsLmNvbSIsImlhdCI6MTcyNjMzNDA0NywiZXhwIjoxNzI2MzQxMjQ3fQ.l7pTpMJa9slC9ckZ04yNy0zdUzpRURRcfKqnHnn4E_k",
 				"type": "string"
 			}
 		]

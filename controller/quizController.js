@@ -173,7 +173,8 @@ module.exports.getHints = async (req, res, next) => {
 module.exports.getQuiz = async (req, res, next) => {
   try {
     console.log("Getting quiz from redis cache");
-    const cached_quiz = await redisCache.get_quiz(req.params.quizName);
+    let cached_quiz = await redisCache.get_quiz(req.params.quizName);
+    cached_quiz = JSON.parse(cached_quiz);
     if (cached_quiz) {
       console.log("Quiz found in Redis cache.");
       return res
@@ -204,11 +205,22 @@ module.exports.getQuiz = async (req, res, next) => {
 };
 
 module.exports.getAll = async (req, res, next) => {
+  // console.log(req.pageFormat);
+  const pageFormat = req.pageFormat;
+  const { skip, limit } = pageFormat;
   try {
-    const quizzes = await Quiz.find().populate("questions");
-    return res
-      .status(200)
-      .send({ message: "Quizzes fetched successfully", quizzes });
+    const quizzes = await Quiz.find()
+      .populate("questions")
+      .skip(skip)
+      .limit(limit)
+      .sort({ createAt: -1 });
+    console.log(quizzes.length);
+    return res.status(200).send({
+      message: "Quizzes fetched successfully",
+      quizzes,
+      pageFormat,
+      length: quizzes.length,
+    });
   } catch (error) {
     console.error("Error fetching all quizzes:", error.message);
     return res.status(500).send({

@@ -3,6 +3,7 @@ const quizController = require("../controller/quizController");
 const authMiddleWare = require("../middleware/authMiddleWare");
 const redisCache = require("../cache/quizCache");
 const rateLimiter = require("../middleware/rateLimiter");
+const paginationFormat = require("../middleware/paginationFormat");
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.post(
 router.get(
   "/quiz-history",
   authMiddleWare.isAuthenticated,
-  rateLimiter.allowUser,
+  rateLimiter.tokenBucket,
   quizController.retrieveQuiz
 );
 router.post(
@@ -31,6 +32,7 @@ router.get(
 router.get(
   "/getAllQuiz",
   authMiddleWare.isAuthenticated,
+  paginationFormat.contructPage,
   quizController.getAll
 );
 router.get(

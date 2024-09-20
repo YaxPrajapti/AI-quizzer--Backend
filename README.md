@@ -108,7 +108,5 @@ If you followed the Docker Installation steps above, your application is already
 To check the logs of the running container:
 
 ```bash
-
     docker logs <container_id>
-
 ```

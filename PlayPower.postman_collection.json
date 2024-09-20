@@ -24,7 +24,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"username\": \"test1\",\n  \"password\": \"test1\",\n  \"email\": \"bajpai.milee@gmail.com\" \n}\n",
+					"raw": "{\n  \"username\": \"test1\",\n  \"password\": \"test1\",\n  \"email\": \"yaxprjpt@gmail.com\", \n  \"role\": \"teacher\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -116,7 +116,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/quiz/quiz-history?from=2024-09-01&to=2024-09-10",
+					"raw": "http://localhost:3000/api/quiz/quiz-history?from=2024-09-14&to=2024-09-14",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -130,11 +130,11 @@
 					"query": [
 						{
 							"key": "from",
-							"value": "2024-09-01"
+							"value": "2024-09-14"
 						},
 						{
 							"key": "to",
-							"value": "2024-09-10"
+							"value": "2024-09-14"
 						}
 					]
 				},
@@ -270,7 +270,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmU0MmIxYTM1MTgwZDE4YjA3ZmI0ZmUiLCJ1c2VybmFtZSI6InRlc3QxIiwicGFzc3dvcmQiOiJ0ZXN0MSIsImVtYWlsIjoiYmFqcGFpLm1pbGVlQGdtYWlsLmNvbSIsImlhdCI6MTcyNjMzNDA0NywiZXhwIjoxNzI2MzQxMjQ3fQ.l7pTpMJa9slC9ckZ04yNy0zdUzpRURRcfKqnHnn4E_k",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmU5NjgyMDgzNzc5YmJlNzAwMzRmMzciLCJ1c2VybmFtZSI6InRlc3Rfc3R1ZGVudCIsInBhc3N3b3JkIjoidGVzdF9zdHVkZW50IiwiZW1haWwiOiJ5YXhwcmpwdEBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTcyNjU3NDMyNCwiZXhwIjoxNzI2NTc0NjI0fQ.eTVnwC69i7xcJ2PfFFciWDq2jhGluwu_wNMaJfp3ORA",
 				"type": "string"
 			}
 		]

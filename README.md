@@ -106,10 +106,9 @@ Make sure to configure your environment variables in the `.env` file. Here’s a
 If you followed the Docker Installation steps above, your application is already running inside a Docker container.
 
 To check the logs of the running container:
+
 ```bash
 
     docker logs <container_id>
 
-## postman collection:
-
-https://api.postman.com/collections/21704786-b1c51319-e953-4714-b52f-ae9ff240ddb3?access_key=PMAT-01J79EB2BMKNA1Y04XH4P8Q905
+```

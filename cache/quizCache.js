@@ -8,6 +8,7 @@ const client = Redis.createClient({
     port: 11510,
   },
 });
+
 client.on("error", (err) => console.log("Redis Client Error", err));
 (async () => {
   try {

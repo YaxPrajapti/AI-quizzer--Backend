@@ -80,19 +80,29 @@ module.exports.submitQuiz = async (req, res, next) => {
     }
     let questionId_to_questionString = new Map();
     quiz.questions.forEach((question) => {
-      questionId_to_questionString.set(
-        question._id.toString(),
-        question.question
-      );
+      questionId_to_questionString.set(question._id.toString(), {
+        questionText: question.question,
+        options: question.options,
+        answer: question.answer,
+      });
     });
-    let payload = []; //we have qestion to ans.
+    let payload = []; // this will be sent to groq AI.
     const maxScore = quiz.maxScore;
     const totalQuestion = quiz.totalQuestion;
     payload.push({ maxScore: maxScore, totalQuestion: totalQuestion });
+    let submissionQuestions = [];
     responses.forEach((response) => {
-      // console.log(response.questionId, response.userResponse);
+      const questionDetails = questionId_to_questionString.get(
+        response.questionId
+      );
+      //add question details to array to add into submission schema.
+      submissionQuestions.push({
+        questionText: questionDetails.questionText,
+        options: questionDetails.options,
+        answer: questionDetails.answer,
+      });
       const pair = {
-        question: questionId_to_questionString.get(response.questionId),
+        question: questionDetails.questionText,
         userResponse: response.userResponse,
       };
       payload.push(pair);
@@ -114,6 +124,7 @@ module.exports.submitQuiz = async (req, res, next) => {
       score: evaluation.finalScore,
       attempt: attempt,
       suggestions: evaluation.suggestions,
+      questions: submissionQuestions,
     });
     const saved_submission = await new_submission.save();
     emailService.sendMail(evaluation, quizName, req.user.email);
@@ -127,6 +138,7 @@ module.exports.submitQuiz = async (req, res, next) => {
       message: "Quiz submitted successfully",
       score: saved_submission.score,
       all_attempts: all_submissions,
+      total_attempts: all_submissions.length,
     });
   } catch (error) {
     return res.status(500).send({
@@ -227,5 +239,31 @@ module.exports.getAll = async (req, res, next) => {
       message: "Error occurred while fetching all quizzes",
       error: error.message,
     });
+  }
+};
+
+module.exports.editQuestion = async (req, res, next) => {
+  const questionId = req.params.questionId;
+  const new_question = req.body;
+  try {
+    const oldQuestion = await Question.findById(questionId);
+    const new_updated_question = await Question.findByIdAndUpdate(
+      questionId,
+      {
+        question: new_question.question,
+        options: new_question.options,
+        answer: new_question.answer,
+        hint: new_question.hint,
+      },
+      { new: true }
+    );
+    await new_updated_question.save();
+    res
+      .status(200)
+      .send({ message: "Question updated successfully", new_updated_question });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error while updating the question", error: error });
   }
 };

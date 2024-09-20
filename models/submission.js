@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const submissionSchema = new mongoose.Schema({
   quizId: {
     type: String,
-    ref: "Quiz",
     required: true,
   },
   userId: {
@@ -26,6 +25,24 @@ const submissionSchema = new mongoose.Schema({
     {
       type: String,
       required: true,
+    },
+  ],
+  questions: [
+    {
+      questionText: {
+        type: String,
+        required: true,
+      },
+      options: [
+        {
+          type: String,
+          required: true,
+        },
+      ],
+      answer: {
+        type: String,
+        required: true,
+      },
     },
   ],
 });

@@ -1,7 +1,6 @@
 const express = require("express");
 const quizController = require("../controller/quizController");
 const authMiddleWare = require("../middleware/authMiddleWare");
-const redisCache = require("../cache/quizCache");
 const rateLimiter = require("../middleware/rateLimiter");
 const paginationFormat = require("../middleware/paginationFormat");
 
@@ -39,6 +38,11 @@ router.get(
   "/:quizName",
   authMiddleWare.isAuthenticated,
   quizController.getQuiz
+);
+router.put(
+  "/edit/:questionId",
+  authMiddleWare.isAuthenticated,
+  quizController.editQuestion
 );
 
 module.exports = router;
